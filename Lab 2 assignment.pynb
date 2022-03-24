@@ -1,0 +1,140 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "lab-2-ali-vlyv.ipynb",
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "ZiwHgQb_4LL9"
+      },
+      "outputs": [],
+      "source": [
+        "studentIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n",
+        "tutorialModule1 = [32, 26, 30, 55, 39, 12, 26, 21, 22, 19]\n",
+        "tutorialModule2 = [50, 10, 50, 25, 30, 25, 12, 33, 54, 11]\n",
+        "tutorialModule3 = [37, 14, 30, 55, 38, 21, 22, 15, 42, 22]"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "##In this lab assignment, you will work on the following dataset:\n",
+        "\n",
+        "The following list contains the Id numbers of students. There are in total 10 students.\n",
+        "\n",
+        "studentIds = [1,2,3,4,5,6,7,8,9,10]\n",
+        "\n",
+        "There is also data about students' visits to tutorial pages in three different models. There is a one-to-one correspondence between the student id numbers and their visits to tutorial pages. For example, the student whose id is 1, visited 32, 50, 37 times the tutorials in module 1, 2, and 3, respectively.\n",
+        "\n",
+        "tutorialModule1 = [32, 26, 30, 55, 39, 12, 26, 21, 22, 19]\n",
+        "tutorialModule2 = [50, 10, 50, 25, 30, 25, 12, 33, 54, 11]\n",
+        "tutorialModule3 = [37, 14, 30, 55, 38, 21, 22, 15, 42, 22]\n",
+        "\n",
+        "The first task is to convert this dataset into a dictionary. "
+      ],
+      "metadata": {
+        "id": "Dce8jw2r6a1u"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "whole_data = list(zip(studentIds, tutorialModule1, tutorialModule2, tutorialModule3))\n",
+        "dictionary = {}\n",
+        "for id, t1, t2, t3 in whole_data:\n",
+        "  dictionary[id] = {\"tutorialModule1\": t1, \"tutorialModule2\": t2, \"tutorialModule3\": t3}\n",
+        "dictionary"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "98cbbroJ4wGc",
+        "outputId": "eb505146-43c1-44e8-ec13-455891c50d41"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "{1: {'tutorialModule1': 32, 'tutorialModule2': 50, 'tutorialModule3': 37},\n",
+              " 2: {'tutorialModule1': 26, 'tutorialModule2': 10, 'tutorialModule3': 14},\n",
+              " 3: {'tutorialModule1': 30, 'tutorialModule2': 50, 'tutorialModule3': 30},\n",
+              " 4: {'tutorialModule1': 55, 'tutorialModule2': 25, 'tutorialModule3': 55},\n",
+              " 5: {'tutorialModule1': 39, 'tutorialModule2': 30, 'tutorialModule3': 38},\n",
+              " 6: {'tutorialModule1': 12, 'tutorialModule2': 25, 'tutorialModule3': 21},\n",
+              " 7: {'tutorialModule1': 26, 'tutorialModule2': 12, 'tutorialModule3': 22},\n",
+              " 8: {'tutorialModule1': 21, 'tutorialModule2': 33, 'tutorialModule3': 15},\n",
+              " 9: {'tutorialModule1': 22, 'tutorialModule2': 54, 'tutorialModule3': 42},\n",
+              " 10: {'tutorialModule1': 19, 'tutorialModule2': 11, 'tutorialModule3': 22}}"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 3
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "##The second task is to find the students whose visits are above the overall average of the whole class. Let's assume that the overall average is 50. Then, your task is to identify the students who visited module 1, 2, and 3 tutorial pages more than 50 times. Overall average should be computed considering all visits (across all modules) by all students.\n",
+        "\n",
+        "Your code should produce the following student id numbers:\n",
+        "\n",
+        "[1, 3, 5]"
+      ],
+      "metadata": {
+        "id": "HbtWfTok6eJy"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "average = 0\n",
+        "lists = []\n",
+        "for id, t1, t2, t3 in whole_data:\n",
+        "  average += (t1+t2+t3)\n",
+        "average = average/30\n",
+        "for id, t1, t2, t3 in whole_data:\n",
+        "  if t1 > average and t2 > average and t3 > average:\n",
+        "    lists.append(id)\n",
+        "lists"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "GLGnfydE6ebg",
+        "outputId": "bff226b1-da37-465f-c054-a3a8d066d55a"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[1, 3, 5]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 13
+        }
+      ]
+    }
+  ]
+}
